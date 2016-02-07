@@ -14,11 +14,14 @@ namespace MirrorApp
     public sealed partial class MainPage : Page
     {
         private DispatcherTimer timer;
+        private Display d;
+        private bool state = false;
         public MainPage()
         {
             //PrmaryScreenResolution.ChangeResolution();
             
             this.InitializeComponent();
+            d = new Display();
             Setup();
         }
 
@@ -83,6 +86,21 @@ namespace MirrorApp
                     SetDate(now);
                     SetBottomText();
                 }                
+            }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            if (state)
+            {
+                state = false;
+                d.SetMonitorState(Display.MonitorState.OFF);
+            }
+            else
+            {
+
+                state = true;
+                d.SetMonitorState(Display.MonitorState.ON);
             }
         }
     }
